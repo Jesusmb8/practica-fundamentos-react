@@ -1,14 +1,14 @@
 import client, {
   removeAuthorizationHeader,
   setAuthorizationHeader,
-} from "../../api/client";
-import storage from "../../utils/storage";
+} from '../../api/client';
+import storage from '../../utils/storage';
 
 export const login = (credentials, handleLogin) => {
-  return client.post("/auth/login", credentials).then(({ accessToken }) => {
+  return client.post('/api/auth/login', credentials).then(({ accessToken }) => {
     setAuthorizationHeader(accessToken);
     if (credentials.remind) {
-      storage.set("authentication", accessToken);
+      storage.set('authentication', accessToken);
     }
     handleLogin();
   });
@@ -17,6 +17,6 @@ export const login = (credentials, handleLogin) => {
 export const logout = () => {
   return Promise.resolve().then(() => {
     removeAuthorizationHeader();
-    storage.remove("authentication");
+    storage.remove('authentication');
   });
 };
