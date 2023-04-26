@@ -28,7 +28,6 @@ const NewAdvertPage = () => {
     const advertResponse = await createAdvert(advert);
     setIsLoading(false);
     // navigate(`/tweets/${tweet.id}`);
-    // TODO: CONTROLAR LOS INPUTS EN EL STATE.
   };
   return (
     <Layout>

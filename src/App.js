@@ -3,6 +3,7 @@ import './App.css';
 import LoginPage from './components/auth/LoginPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import AdvertsPage from './components/adverts/AdvertsPage';
+import AdvertPage from './components/adverts/AdvertPage';
 import NewAdvertPage from './components/adverts/NewAdvertPage';
 
 function App() {
@@ -15,6 +16,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AdvertsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/adverts/:advertId'
+          element={
+            <ProtectedRoute>
+              <AdvertPage />
             </ProtectedRoute>
           }
         />
