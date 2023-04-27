@@ -6,13 +6,16 @@ const Header = (...rest) => {
   const { isLogged, onLogout } = useAuth();
 
   const handleLogoutClick = async () => {
-    await logout();
-    onLogout();
+    if (window.confirm('¿Quiere cerrar sesión?')) {
+      await logout();
+      onLogout();
+    }
   };
   return (
     <header>
       <nav>
-        <NavLink to='/newAdvertPage'> Crear advert</NavLink>
+        <NavLink to='/adverts'> Listado de anuncios</NavLink>
+        <NavLink to='/adverts/new'> Crear advert</NavLink>
         {isLogged ? (
           <button onClick={handleLogoutClick} className='header-button'>
             Logout

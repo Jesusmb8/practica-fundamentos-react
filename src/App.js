@@ -28,7 +28,7 @@ function App() {
           }
         />
         <Route
-          path='/newAdvertPage'
+          path='/adverts/new'
           element={
             <ProtectedRoute>
               <NewAdvertPage />

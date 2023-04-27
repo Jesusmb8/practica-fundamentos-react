@@ -1,23 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../layout/Layout';
-import { createAdvert } from './service';
+import { createAdvert, getTags } from './service';
+import { useNavigate } from 'react-router-dom';
 
 const NewAdvertPage = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [tags, setTags] = useState([]);
+  const navigate = useNavigate();
 
   const [advert, setAdvert] = useState({
     name: '',
     sale: false,
     price: 0.001,
     tags: '',
-    // photo: '',
+    photo: '',
   });
-
+  useEffect(() => {
+    async function getData() {
+      try {
+        const tagsQuery = await getTags();
+        setTags(tagsQuery);
+      } catch (error) {}
+    }
+    getData();
+  }, []);
   const handleChange = (event) => {
     setAdvert({
       ...advert,
       [event.target.name]: event.target.value,
     });
+    console.log(event.target.files[0]);
   };
 
   const buttonEnabled = advert.name && advert.price && advert.tags;
@@ -27,7 +39,7 @@ const NewAdvertPage = () => {
     setIsLoading(true);
     const advertResponse = await createAdvert(advert);
     setIsLoading(false);
-    // navigate(`/tweets/${tweet.id}`);
+    navigate(`/adverts/${advertResponse.id}`);
   };
   return (
     <Layout>
@@ -69,11 +81,19 @@ const NewAdvertPage = () => {
           value={advert.tag}
         >
           <option value=''> </option>
-          <option value='lifestyle'>lifestyle </option>
-          <option value='mobile'>mobile</option>
-          <option value='motor'>motor</option>
-          <option value='work'>work</option>
+          {tags.map((tag) => {
+            return <option value={tag}>{tag} </option>;
+          })}
         </select>
+        <br />
+        <label for='photo'>Foto</label>
+        <input
+          type='file'
+          id='photo'
+          name='photo'
+          onChange={handleChange}
+          value={advert.photo}
+        />
         <button type='submit' disabled={!buttonEnabled}>
           Crear advert
         </button>
