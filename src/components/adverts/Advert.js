@@ -1,15 +1,14 @@
 import Layout from '../layout/Layout';
+import './Advert.css';
 
-const Advert = ({ id, price, name, sale, photo }) => {
+const Advert = ({ price, name, sale, tags }) => {
   return (
-    <>
-      <p>{id}</p>
-      <p>{price}</p>
+    <div className='advert'>
       <p>{name}</p>
-      <p>Tipo:{sale.toString()}</p>
-      <p>Photo:{photo}</p>
-      <img src={photo} />
-    </>
+      <p>{price} € </p>
+      <p>{sale ? 'Se vende' : 'Se compra'}</p>
+      <p>{tags}</p>
+    </div>
   );
 };
 

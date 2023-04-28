@@ -27,9 +27,11 @@ const NewAdvertPage = () => {
   const handleChange = (event) => {
     setAdvert({
       ...advert,
-      [event.target.name]: event.target.value,
+      [event.target.name]:
+        event.target.type === 'file'
+          ? event.target.files[0]
+          : event.target.value,
     });
-    console.log(event.target.files[0]);
   };
 
   const buttonEnabled = advert.name && advert.price && advert.tags;
@@ -37,7 +39,11 @@ const NewAdvertPage = () => {
     e.preventDefault();
 
     setIsLoading(true);
-    const advertResponse = await createAdvert(advert);
+    let body = new FormData();
+    Object.entries(advert).forEach(([key, value]) => {
+      body.append(key, value);
+    });
+    const advertResponse = await createAdvert(body);
     setIsLoading(false);
     navigate(`/adverts/${advertResponse.id}`);
   };
@@ -59,7 +65,6 @@ const NewAdvertPage = () => {
           type='checkbox'
           id='sale'
           name='sale'
-          required
           onChange={handleChange}
           value={advert.sale}
         />
@@ -87,13 +92,7 @@ const NewAdvertPage = () => {
         </select>
         <br />
         <label for='photo'>Foto</label>
-        <input
-          type='file'
-          id='photo'
-          name='photo'
-          onChange={handleChange}
-          value={advert.photo}
-        />
+        <input type='file' id='photo' name='photo' onChange={handleChange} />
         <button type='submit' disabled={!buttonEnabled}>
           Crear advert
         </button>

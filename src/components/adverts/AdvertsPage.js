@@ -37,7 +37,7 @@ const AdvertsPage = () => {
       {isLoading && <div>Cargando...!</div>}
       {!isLoading && (
         <>
-          <div>
+          <div className='element-form'>
             <label for='filterName'>Filtrar por nombre</label>
             <input
               id='filterName'
@@ -46,7 +46,7 @@ const AdvertsPage = () => {
               value={filterName}
             />
           </div>
-          <div>
+          <div className='element-form'>
             <fieldset>
               <legend>Tipo de artículo</legend>
               <div>

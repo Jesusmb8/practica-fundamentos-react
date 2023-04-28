@@ -33,9 +33,11 @@ function AdvertsPage() {
   };
   return (
     <Layout>
-      <h1>AdvertPage: {advert.id}</h1>
-      <h1>createdAt: {advert.createdAt}</h1>
-      <button onClick={handleDelete}> Borrar</button>
+      <h1>AdvertPage</h1>
+      <h5>{advert.name}</h5>
+      <img src={advert.photo} alt='Imagen del anuncio' />
+      <p>{advert.price}€</p>
+      <button onClick={handleDelete}> Pulse para eliminar el anuncio</button>
     </Layout>
   );
 }

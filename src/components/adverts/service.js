@@ -19,7 +19,12 @@ export const deleteAdvert = (id) => {
   return client.delete(url);
 };
 
-export const createAdvert = ({ ...advertContent }) => {
+export const createAdvert = (advertContent) => {
   const url = advertsUrl;
-  return client.post(url, advertContent, {});
+  const headers = {
+    headers: {
+      'Content-type': 'multipart/form-data',
+    },
+  };
+  return client.post(url, advertContent, headers);
 };
