@@ -21,8 +21,12 @@ const Header = (...rest) => {
           <h1>Nodepop</h1>
         </div>
         <span className='nav-links'>
-          <NavLink to='/adverts'> Listado de anuncios</NavLink>
-          <NavLink to='/adverts/new'> Nuevo anuncio</NavLink>
+          <NavLink className='link' to='/adverts'>
+            Listado de anuncios
+          </NavLink>
+          <NavLink className='link' to='/adverts/new'>
+            Nuevo anuncio
+          </NavLink>
           {isLogged ? (
             <button onClick={handleLogoutClick} className='header-button'>
               Logout

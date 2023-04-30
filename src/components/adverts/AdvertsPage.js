@@ -33,7 +33,7 @@ const AdvertsPage = () => {
 
   return (
     <Layout>
-      <h1>ADVERTS PAGE </h1>
+      <h1>Anuncios </h1>
       {isLoading && <div>Cargando...!</div>}
       {!isLoading && (
         <>

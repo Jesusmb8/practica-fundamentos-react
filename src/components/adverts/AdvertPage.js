@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from '../layout/Layout';
-import { useEffect, useState } from 'react';
 import { deleteAdvert, getAdvert } from './service';
+import './Advert.css';
 
 function AdvertsPage() {
   const params = useParams();
@@ -20,7 +21,8 @@ function AdvertsPage() {
       }
     }
     getData();
-  }, []);
+  }, [navigate, params]);
+
   const handleDelete = async () => {
     if (window.confirm('¿Está seguro de eliminar el anuncio?')) {
       try {
@@ -31,12 +33,19 @@ function AdvertsPage() {
       }
     }
   };
+
+  let color = advert.sale ? 'color-green' : 'color-blue';
   return (
     <Layout>
-      <h1>AdvertPage</h1>
-      <h5>{advert.name}</h5>
-      <img src={advert.photo} alt='Imagen del anuncio' />
-      <p>{advert.price}€</p>
+      <h1>Detalle de anuncio</h1>
+      <img className='img-detail' src={advert.photo} alt='Imagen del anuncio' />
+      <p className='title'>{advert.name}</p>
+      <p className='price'>{advert.price}€</p>
+      <p className={color}>{advert.sale ? 'Se vende' : 'Se compra'}</p>
+      <div>
+        {advert.tags &&
+          advert.tags.map((tag) => <span className='tag'> {tag} </span>)}
+      </div>
       <button onClick={handleDelete}> Pulse para eliminar el anuncio</button>
     </Layout>
   );

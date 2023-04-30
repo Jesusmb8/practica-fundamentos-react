@@ -1,15 +1,16 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
+import AdvertPage from './components/adverts/AdvertPage';
+import AdvertsPage from './components/adverts/AdvertsPage';
+import NewAdvertPage from './components/adverts/NewAdvertPage';
 import LoginPage from './components/auth/LoginPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import AdvertsPage from './components/adverts/AdvertsPage';
-import AdvertPage from './components/adverts/AdvertPage';
-import NewAdvertPage from './components/adverts/NewAdvertPage';
 
 function App() {
   return (
     <div className='app'>
       <Routes>
+        <Route exact path='/' element={<Navigate to='/adverts' />} />
         <Route path='/login' element={<LoginPage />} />
         <Route
           path='/adverts'

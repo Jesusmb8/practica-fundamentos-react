@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from './context';
-import { login } from './service';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import './LoginPage.css';
+import { useAuth } from './context';
+import { login } from './service';
 
 const LoginPage = () => {
   const { onLogin } = useAuth();
@@ -55,7 +55,7 @@ const LoginPage = () => {
               value={credentials.password}
             />
           </div>
-          <div className='element-form'>
+          <div className='margin10 '>
             <label for='remind'>Recordarme</label>
             <input
               id='remind'
