@@ -16,10 +16,10 @@ const Header = (...rest) => {
   return (
     <header className='header'>
       <nav className='navbar'>
-        <span>
+        <div className='nav-logo'>
           <ReactLogo />
           <h1>Nodepop</h1>
-        </span>
+        </div>
         <span className='nav-links'>
           <NavLink to='/adverts'> Listado de anuncios</NavLink>
           <NavLink to='/adverts/new'> Nuevo anuncio</NavLink>

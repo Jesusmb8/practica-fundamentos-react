@@ -12,8 +12,7 @@ const NewAdvertPage = () => {
     name: '',
     sale: false,
     price: 0.001,
-    tags: '',
-    photo: '',
+    tags: [],
   });
   useEffect(() => {
     async function getData() {
@@ -33,6 +32,12 @@ const NewAdvertPage = () => {
           : event.target.value,
     });
   };
+  const handleChangeSelect = (event) => {
+    setAdvert({
+      ...advert,
+      tags: Object.values(event.target.selectedOptions).map((opt) => opt.value),
+    });
+  };
 
   const buttonEnabled = advert.name && advert.price && advert.tags;
   const handleSubmit = async (e) => {
@@ -41,6 +46,12 @@ const NewAdvertPage = () => {
     setIsLoading(true);
     let body = new FormData();
     Object.entries(advert).forEach(([key, value]) => {
+      // if (key === 'tags') {
+      //   Object.entries(key).forEach((value) => {
+      //     body.append('tags', value);
+      //   });
+      // } else {
+      // }
       body.append(key, value);
     });
     const advertResponse = await createAdvert(body);
@@ -51,51 +62,63 @@ const NewAdvertPage = () => {
     <Layout>
       <h2>New Advert Page</h2>
       <form onSubmit={handleSubmit}>
-        <label for='name'> Nombre</label>
-        <input
-          type='text'
-          id='name'
-          name='name'
-          required
-          onChange={handleChange}
-          value={advert.name}
-        />
-        <label for='sale'> Se vende?</label>
-        <input
-          type='checkbox'
-          id='sale'
-          name='sale'
-          onChange={handleChange}
-          value={advert.sale}
-        />
-        <label for='price'> Precio</label>
-        <input
-          type='numeric'
-          id='price'
-          name='price'
-          required
-          onChange={handleChange}
-          value={advert.price}
-        />
-        <label for='tags'></label>
-        <select
-          name='tags'
-          id='tags'
-          required
-          onChange={handleChange}
-          value={advert.tag}
-        >
-          <option value=''> </option>
-          {tags.map((tag) => {
-            return <option value={tag}>{tag} </option>;
-          })}
-        </select>
-        <br />
-        <label for='photo'>Foto</label>
-        <input type='file' id='photo' name='photo' onChange={handleChange} />
-        <button type='submit' disabled={!buttonEnabled}>
-          Crear advert
-        </button>
+        <div className='element-form'>
+          <label for='name'> Nombre</label>
+          <input
+            type='text'
+            id='name'
+            name='name'
+            required
+            onChange={handleChange}
+            value={advert.name}
+          />
+        </div>
+        <div className='element-form'>
+          <label for='sale'> Se vende?</label>
+          <input
+            type='checkbox'
+            id='sale'
+            name='sale'
+            onChange={handleChange}
+            value={advert.sale}
+          />
+        </div>
+        <div className='element-form'>
+          <label for='price'> Precio</label>
+          <input
+            type='numeric'
+            id='price'
+            name='price'
+            required
+            onChange={handleChange}
+            value={advert.price}
+          />
+        </div>
+        <div className='element-form'>
+          <label for='tags'></label>
+          <select
+            name='tags'
+            id='tags'
+            required
+            multiple
+            onChange={handleChangeSelect}
+            value={advert.tag}
+          >
+            <option value=''> </option>
+            {tags.map((tag) => {
+              return <option value={tag}>{tag} </option>;
+            })}
+          </select>
+        </div>
+        <div className='element-form'>
+          <label for='photo'>Foto</label>
+          <input type='file' id='photo' name='photo' onChange={handleChange} />
+        </div>
+        <div className='element-form'>
+          <button type='submit' disabled={!buttonEnabled}>
+            Crear advert
+          </button>
+        </div>
       </form>
     </Layout>
   );

@@ -9,4 +9,12 @@
     justify-content: end;
     padding: 10px;
     gap: 20px;
+    align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
 }

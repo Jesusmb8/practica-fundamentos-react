@@ -1,4 +1,3 @@
-import Layout from '../layout/Layout';
 import './Advert.css';
 
 const Advert = ({ price, name, sale, tags }) => {
@@ -7,7 +6,9 @@ const Advert = ({ price, name, sale, tags }) => {
       <p>{name}</p>
       <p>{price} € </p>
       <p>{sale ? 'Se vende' : 'Se compra'}</p>
-      <p>{tags}</p>
+      {tags.map((tag) => (
+        <p>{tag}</p>
+      ))}
     </div>
   );
 };
